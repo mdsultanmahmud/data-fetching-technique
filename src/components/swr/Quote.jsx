@@ -6,7 +6,7 @@ const fetcher = async(...args) =>{
     return data 
 }
 const Quote = () => {
-    const {data, error} = useSWR("https://api.quotable.io/random", fetcher, {
+    const {data} = useSWR("https://api.quotable.io/random", fetcher, {
         suspense: true
     })
     return (
