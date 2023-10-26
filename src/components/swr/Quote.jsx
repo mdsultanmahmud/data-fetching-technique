@@ -1,23 +1,18 @@
-import { useEffect, useState } from 'react';
+import useSWR from "swr";
 
+const fetcher = async(...args) =>{
+    const res = await fetch(...args)
+    const data = await res.json()
+    return data 
+}
 const Quote = () => {
-    const [quote, setQuote] = useState(null)
-    useEffect(() =>{
-        const getQuote = async() =>{
-            try{
-                const res = await fetch(`https://api.quotable.io/random`)
-                const data = await res.json()
-                setQuote(data)
-            }catch(error){
-                console.log(error)
-            }
-        }
-        getQuote()
-    },[])
+    const {data, error} = useSWR("https://api.quotable.io/random", fetcher, {
+        suspense: true
+    })
     return (
         <div>
             <h1>Api fetching with SWR method!!</h1>
-            {quote?.content && <h3>content: {quote?.content}</h3>}
+            {data?.content && <h3>content: {data?.content}</h3>}
         </div>
     );
 };
