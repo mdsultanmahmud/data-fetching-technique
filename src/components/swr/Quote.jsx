@@ -16,7 +16,7 @@ const Quote = () => {
     },[])
     return (
         <div>
-            <h1>Api fetching with default fetch method!!</h1>
+            <h1>Api fetching with SWR method!!</h1>
             {quote?.content && <h3>content: {quote?.content}</h3>}
         </div>
     );
